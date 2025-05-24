@@ -8,25 +8,29 @@ const { generateToken, JWT_SECRET } = require("./utils/jwt");
 const authenticate = require("./middleware/auth");
 require('dotenv').config();
 
-// En tu app.js o index.js
+const app = express(); // ✅ DECLARADO AQUÍ UNA SOLA VEZ
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Rutas externas (asegúrate de que esta ruta existe)
 const heroGrupoRoutes = require('./routes/heroGrupoMultimedia.routes');
-app.use('/heroesgrupos', heroGrupoRoutes);
+app.use('/heroesgrupos', heroGrupoRoutes); // ✅ DESPUÉS de declarar 'app'
+
+// app.js
 
 
-
-
-
-const app = express();
-
-// Configurar CORS explícitamente
+// Configurar CORS para permitir solicitudes desde el frontend
 app.use(cors({
-  origin: 'http://localhost:8100', // Origen del frontend
+  origin: 'http://localhost:8100', // Origen específico de tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
-  credentials: true, // Permitir credenciales (Authorization header)
-  allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+  credentials: true // Permitir el envío de credenciales (como el token)
 }));
 
 app.use(express.json());
+
+// ... resto del código
 mongoose
   .connect(
     process.env.MONGODB_URI || "mongodb+srv://admin:admin123@cluster0.3fihmjk.mongodb.net/HeroesMobile?retryWrites=true&w=majority&appName=Cluster0",
