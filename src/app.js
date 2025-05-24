@@ -22,12 +22,7 @@ app.use('/heroesgrupos', heroGrupoRoutes); // ✅ DESPUÉS de declarar 'app'
 
 
 // Configurar CORS para permitir solicitudes desde el frontend
-app.use(cors({
-  origin: 'http://localhost:8100', // Origen específico de tu frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
-  credentials: true // Permitir el envío de credenciales (como el token)
-}));
-
+app.use(cors()); // ✅ permite solicitudes desde cualquier origen
 app.use(express.json());
 
 // ... resto del código
