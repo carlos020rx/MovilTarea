@@ -13,8 +13,8 @@ const heroGrupoRoutes = require('./routes/heroGrupoMultimedia.routes');
 app.use('/heroesgrupos', heroGrupoRoutes);
 
 
-const express = require("express");
-const cors = require("cors");
+
+
 
 const app = express();
 
